@@ -609,7 +609,7 @@ contract ERC20 is Context, IERC20, IERC20Metadata {
 pragma solidity ^0.8.4;
 
 contract Token is ERC20, Ownable {
-    constructor() ERC20("BBB Token", "BBB") {
+    constructor(string memory name_, string memory symbol_) ERC20(name_, symbol_) {
         _mint(msg.sender, 500000000000 * 10 ** decimals());
     }
 }

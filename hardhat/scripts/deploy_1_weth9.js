@@ -1,15 +1,10 @@
 // This is a script for deploying your contracts. You can adapt it to deploy
 // yours, or create new ones.
+const {
+    writeConfig
+} = require('./utils/helper')
 
 async function main() {
-    // This is just a convenience check
-    if (network.name === "hardhat") {
-        console.warn(
-            "You are trying to deploy a contract to the Hardhat Network, which" +
-            "gets automatically created and destroyed every time. Use the Hardhat" +
-            " option '--network localhost'"
-        );
-    }
 
     // ethers is available in the global scope
     const [deployer] = await ethers.getSigners();
@@ -25,6 +20,7 @@ async function main() {
     const weth9 = await WETH9.deploy();
     await weth9.deployed();
 
+    writeConfig('0config', '0config', 'weth9', weth9.address);
     console.log("WETH9 address:", weth9.address);
 }
 

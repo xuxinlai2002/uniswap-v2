@@ -1,0 +1,5 @@
+{
+    "weth9": "0x7a98e0154B62731615ab375777e2be7f85720E73",
+    "uniswapV2Factory": "0x24c553DdCE2fb3a5B201C404f159058Df8b8EdAB",
+    "uniswapV2Router02": "0x2C95b2007942F4bA331A06D9097acDdEABdB09b7"
+}

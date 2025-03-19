@@ -1,15 +1,11 @@
 // This is a script for deploying your contracts. You can adapt it to deploy
 // yours, or create new ones.
+const {
+    readConfig,
+    writeConfig
+} = require('./utils/helper')
 
 async function main() {
-    // This is just a convenience check
-    if (network.name === "hardhat") {
-        console.warn(
-            "You are trying to deploy a contract to the Hardhat Network, which" +
-            "gets automatically created and destroyed every time. Use the Hardhat" +
-            " option '--network localhost'"
-        );
-    }
 
     // ethers is available in the global scope
     const [deployer] = await ethers.getSigners();
@@ -27,10 +23,17 @@ async function main() {
 //solidity version：0.8.0
 async function erc20Factory(){
     const Token = await ethers.getContractFactory("Token");
-    const token = await Token.deploy();
+    const token = await Token.deploy('token1', 'token1');
     await token.deployed();
 
+    writeConfig('0config', '0config', 'token1', token.address);
     console.log("erc20 address:", token.address);
+
+    const token2 = await Token.deploy('token2', 'token2');
+    await token2.deployed();
+
+    writeConfig('0config', '0config', 'token2', token2.address);
+    console.log("erc20 address:", token2.address);
 }
 
 main()
