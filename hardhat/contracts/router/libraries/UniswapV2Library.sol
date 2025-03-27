@@ -1,13 +1,11 @@
 pragma solidity =0.6.6;
 
 import '../interfaces/IUniswapV2Pair.sol';
-
 import "./SafeMath.sol";
 
 library UniswapV2Library {
     using SafeMath for uint;
 
-    // 对两个 token 进行排序
     // returns sorted token addresses, used to handle return values from pairs sorted in this order
     function sortTokens(address tokenA, address tokenB) internal pure returns (address token0, address token1) {
         require(tokenA != tokenB, 'UniswapV2Library: IDENTICAL_ADDRESSES');
@@ -15,7 +13,6 @@ library UniswapV2Library {
         require(token0 != address(0), 'UniswapV2Library: ZERO_ADDRESS');
     }
 
-    // 计算出两个 token 的 pair 合约地址
     // calculates the CREATE2 address for a pair without making any external calls
     function pairFor(address factory, address tokenA, address tokenB) internal pure returns (address pair) {
         (address token0, address token1) = sortTokens(tokenA, tokenB);
@@ -23,9 +20,8 @@ library UniswapV2Library {
                 hex'ff',
                 factory,
                 keccak256(abi.encodePacked(token0, token1)),
-                hex'6ea2252a145d03633feebbade3509ebd120dbe9d50dbf6bd343c366dc155dc67' // init code hash 该值其实是 UniswapV2Pair 合约的 creationCode 的哈希值
+                hex'bbb3a59f9210749e0ed572f30c64d8e82ad27379f21f899755fdb9a2b44e7a8c' // init code hash
             ))));
-        //另外，INIT_CODE_PAIR_HASH 的值是带有 0x 开头的。而以上硬编码的 init code hash 前面已经加了 hex 关键字，所以单引号里的哈希值就不再需要 0x 开头。
     }
 
     // 获取两个 token 在池子里里的储备量

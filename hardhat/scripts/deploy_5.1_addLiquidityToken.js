@@ -1,8 +1,7 @@
 // This is a script for deploying your contracts. You can adapt it to deploy
 // yours, or create new ones.
 const {
-    readConfig,
-    writeConfig
+    readConfig
 } = require('./utils/helper')
 
 async function main() {
@@ -13,7 +12,7 @@ async function main() {
     );
 
     // 读取配置
-    const config = readConfig();
+  
     const token1Address = await readConfig('0config', 'token1');
     const token2Address = await readConfig('0config', 'token2');
     const routerAddress = await readConfig('0config', 'uniswapV2Router02');
